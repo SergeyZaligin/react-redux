@@ -1,53 +1,53 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import axios from 'axios';
 
-import classes from "./Auth.css";
-import Button from "../../components/UI/Button/Button";
-import Input from "../../components/UI/Input/Input";
+import classes from './Auth.css';
+import Button from '../../components/UI/Button/Button';
+import Input from '../../components/UI/Input/Input';
 
-import is from "is_js";
+import is from 'is_js';
 
 class Auth extends Component {
   state = {
     isFormValid: false,
     formControls: {
       email: {
-        value: "",
-        type: "email",
-        label: "Email",
-        errorMessage: "Введите корректный Email",
+        value: '',
+        type: 'email',
+        label: 'Email',
+        errorMessage: 'Введите корректный Email',
         valid: false,
         touched: false,
         validation: {
           required: true,
-          email: true
-        }
+          email: true,
+        },
       },
       password: {
-        value: "",
-        type: "password",
-        label: "Пароль",
-        errorMessage: "Введите корректный пароль",
+        value: '',
+        type: 'password',
+        label: 'Пароль',
+        errorMessage: 'Введите корректный пароль',
         valid: false,
         touched: false,
         validation: {
           required: true,
-          minLength: 6
-        }
-      }
-    }
+          minLength: 6,
+        },
+      },
+    },
   };
 
   loginHandler = async () => {
     const authData = {
       email: this.state.formControls.email.value,
       password: this.state.formControls.password.value,
-      returnSecureToken: true
+      returnSecureToken: true,
     };
     try {
       const response = await axios.post(
-        "https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyA19IU83EtA-HxpjV6slMHj29h9h1E3S3c",
-        authData
+        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyA19IU83EtA-HxpjV6slMHj29h9h1E3S3c',
+        authData,
       );
       console.log(response.data);
     } catch (e) {
@@ -59,12 +59,12 @@ class Auth extends Component {
     const authData = {
       email: this.state.formControls.email.value,
       password: this.state.formControls.password.value,
-      returnSecureToken: true
+      returnSecureToken: true,
     };
     try {
       const response = await axios.post(
-        "https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyA19IU83EtA-HxpjV6slMHj29h9h1E3S3c",
-        authData
+        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyA19IU83EtA-HxpjV6slMHj29h9h1E3S3c',
+        authData,
       );
       console.log(response.data);
     } catch (e) {
@@ -84,7 +84,7 @@ class Auth extends Component {
     let isValid = true;
 
     if (validation.required) {
-      isValid = value.trim() !== "" && isValid;
+      isValid = value.trim() !== '' && isValid;
     }
 
     if (validation.email) {
@@ -116,7 +116,7 @@ class Auth extends Component {
 
     this.setState({
       formControls,
-      isFormValid
+      isFormValid,
     });
   };
 
@@ -150,11 +150,7 @@ class Auth extends Component {
           <form onSubmit={this.submitHandler} className={classes.AuthForm}>
             {this.renderInputs()}
 
-            <Button
-              type="success"
-              onClick={this.loginHandler}
-              disabled={!this.state.isFormValid}
-            >
+            <Button type="success" onClick={this.loginHandler} disabled={!this.state.isFormValid}>
               Войти
             </Button>
 

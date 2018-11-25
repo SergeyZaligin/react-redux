@@ -118,5 +118,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^13.1.0"
   }
 }
